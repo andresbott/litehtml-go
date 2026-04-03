@@ -1,0 +1,10 @@
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+
+# IDE
+.idea/
+.vscode/
+*.swp
