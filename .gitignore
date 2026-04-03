@@ -8,3 +8,11 @@
 .idea/
 .vscode/
 *.swp
+
+# Coverage
+cover.html
+cover.out
+coverage.out
+
+# Example output
+examples/rich/output.png
