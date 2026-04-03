@@ -1,0 +1,18 @@
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Coverage
+cover.html
+cover.out
+coverage.out
+
+# Example output
+examples/rich/output.png
