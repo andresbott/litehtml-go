@@ -16,3 +16,6 @@ coverage.out
 
 # Example output
 examples/rich/output.png
+
+# Temporary build/test directory
+tmp/
