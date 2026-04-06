@@ -20,8 +20,23 @@ license-check: ## check for invalid licenses
 benchmark: ## run go benchmarks
 	@go test -run=^$$ -bench=. ./...
 
+.PHONY: vendor-build
+vendor-build: ## verify that go mod vendor works for consumers
+	@rm -rf $(PWD_DIR)/tmp/vendor-test && \
+	mkdir -p $(PWD_DIR)/tmp/vendor-test && \
+	cd $(PWD_DIR)/tmp/vendor-test && \
+	go mod init vendor-test && \
+	go mod edit -require github.com/andresbott/litehtml-go@v0.0.0 && \
+	go mod edit -replace github.com/andresbott/litehtml-go=$(PWD_DIR) && \
+	printf 'package main\nimport litehtml "github.com/andresbott/litehtml-go"\nfunc main() { _ = litehtml.Position{} }\n' > main.go && \
+	go mod tidy && \
+	go mod vendor && \
+	go build -mod=vendor . && \
+	echo "✅ Vendored consumer build succeeded" && \
+	rm -rf $(PWD_DIR)/tmp/vendor-test
+
 .PHONY: verify
-verify: lint test license-check benchmark coverage ## run all checks
+verify: lint test license-check benchmark coverage vendor-build ## run all checks
 
 # Default coverage threshold is 70
 COVERAGE_THRESHOLD ?= 70

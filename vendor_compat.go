@@ -13,4 +13,4 @@ package litehtml
 import "embed"
 
 //go:embed all:litehtml/src all:litehtml/include
-var litehtmlSources embed.FS
+var _ embed.FS
